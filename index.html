@@ -406,6 +406,96 @@ body::after{
 }
 .lightbox .lb-close:hover{background:rgba(255,255,255,.2)}
 
+/* ── document showcase ── */
+.doc-tabs{
+  display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-bottom:2rem;
+}
+.doc-tab{
+  padding:.55rem 1.3rem;border-radius:999px;font-size:.85rem;font-weight:600;
+  cursor:pointer;transition:all .3s;border:1.5px solid var(--glass-border);
+  background:var(--glass);color:var(--text-dim);backdrop-filter:blur(8px);
+}
+.doc-tab:hover{border-color:rgba(0,210,255,.35);color:var(--accent)}
+.doc-tab.active{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border-color:transparent;
+  box-shadow:0 4px 20px rgba(0,210,255,.25);
+}
+.doc-panel{display:none}
+.doc-panel.active{display:block;animation:fadeUp .4s ease}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.doc-card{
+  display:flex;align-items:flex-start;gap:1rem;padding:1.3rem 1.5rem;
+  border-radius:var(--radius);background:var(--card-bg);
+  border:1px solid var(--glass-border);backdrop-filter:blur(12px);
+  transition:all .35s;cursor:pointer;position:relative;overflow:hidden;
+  text-decoration:none;color:inherit;
+}
+.doc-card::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
+  transform:scaleY(0);transform-origin:top;transition:transform .4s;
+}
+.doc-card:hover::before{transform:scaleY(1)}
+.doc-card:hover{border-color:rgba(0,210,255,.25);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,210,255,.08)}
+.doc-icon{
+  font-size:2rem;flex-shrink:0;width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:12px;background:var(--glass);
+}
+.doc-info{flex:1;min-width:0}
+.doc-info h4{font-size:.9rem;font-weight:600;margin-bottom:.25rem;line-height:1.4}
+.doc-info p{font-size:.78rem;color:var(--text-dim);line-height:1.5;margin-bottom:.5rem}
+.doc-type{
+  display:inline-block;font-size:.68rem;padding:.15rem .5rem;border-radius:999px;
+  font-weight:600;text-transform:uppercase;
+}
+.doc-type.docx{background:rgba(37,99,235,.15);color:#60a5fa;border:1px solid rgba(37,99,235,.25)}
+.doc-type.xlsx{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.25)}
+.doc-type.pptx{background:rgba(249,115,22,.15);color:#fb923c;border:1px solid rgba(249,115,22,.25)}
+.doc-type.pdf{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+.doc-type.md{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.25)}
+.doc-count{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.82rem;color:var(--text-dim);margin-left:.6rem;
+}
+.category-desc{
+  text-align:center;color:var(--text-dim);font-size:.88rem;margin-bottom:1.8rem;
+  max-width:600px;margin-left:auto;margin-right:auto;
+}
+
+/* ── salary card ── */
+.salary-banner{
+  margin-top:2rem;padding:2rem 2.5rem;border-radius:var(--radius);
+  background:linear-gradient(135deg,rgba(0,210,255,.08),rgba(123,47,247,.08),rgba(248,87,166,.06));
+  border:1px solid rgba(0,210,255,.2);
+  backdrop-filter:blur(12px);position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;
+}
+.salary-banner::before{
+  content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(123,47,247,.1),transparent 70%);
+}
+.salary-item{text-align:center;position:relative;z-index:1}
+.salary-item .salary-value{
+  font-size:clamp(1.4rem,3vw,1.8rem);font-weight:800;
+  background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  margin-bottom:.2rem;
+}
+.salary-item .salary-label{font-size:.82rem;color:var(--text-dim)}
+.salary-divider{
+  width:1px;height:50px;background:var(--glass-border);flex-shrink:0;
+}
+
+@media(max-width:768px){
+  .doc-grid{grid-template-columns:1fr}
+  .doc-tabs{gap:.4rem}
+  .doc-tab{padding:.45rem 1rem;font-size:.8rem}
+  .salary-banner{gap:1.5rem;padding:1.5rem}
+  .salary-divider{width:50px;height:1px}
+}
+
 /* ── contact / footer ── */
 .contact{
   text-align:center;padding:4rem 2rem;
@@ -479,6 +569,7 @@ body::after{
       <li><a href="#experience" onclick="closeNav()">工作经历</a></li>
       <li><a href="#projects" onclick="closeNav()">项目经历</a></li>
       <li><a href="#showcase" onclick="closeNav()">成果展示</a></li>
+      <li><a href="#documents" onclick="closeNav()">工作文档</a></li>
       <li><a href="#supply" onclick="closeNav()">供应链</a></li>
       <li><a href="#education" onclick="closeNav()">教育背景</a></li>
       <li><a href="#skills" onclick="closeNav()">技能矩阵</a></li>
@@ -865,6 +956,17 @@ body::after{
 
     <div class="showcase-card animate" onclick="openLightbox(this)">
       <div class="card-media">
+        <span class="media-tag system">总体设计</span>
+        <img src="成果图片/激光导航飞机总体设计管理.png" alt="激光导航飞机总体设计管理" loading="lazy">
+      </div>
+      <div class="card-body">
+        <h4>激光导航飞机总体设计管理</h4>
+        <p>激光导航无人机总体设计与项目管理全流程，涵盖系统架构、模块划分与技术指标管控</p>
+      </div>
+    </div>
+
+    <div class="showcase-card animate" onclick="openLightbox(this)">
+      <div class="card-media">
         <span class="media-tag algo">算法成果</span>
         <img src="成果图片/算法.jpg" alt="SLAM算法轨迹" loading="lazy">
       </div>
@@ -941,6 +1043,290 @@ body::after{
   <div id="lbContent"></div>
   <div class="lb-caption" id="lbCaption"></div>
 </div>
+
+<!-- ═══════ Work Documents ═══════ -->
+<section class="section" id="documents">
+  <div class="section-header">
+    <h2>工作 <span>文档</span></h2>
+    <p>涵盖业务方案、质量管理、动力系统、智能化与总体设计的全域工作成果</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="doc-tabs">
+    <button class="doc-tab active" onclick="switchDocTab(0)">📋 业务相关经历<span class="doc-count">(7)</span></button>
+    <button class="doc-tab" onclick="switchDocTab(1)">✅ 可靠性与质量管理<span class="doc-count">(5)</span></button>
+    <button class="doc-tab" onclick="switchDocTab(2)">⚡ 动力系统<span class="doc-count">(4)</span></button>
+    <button class="doc-tab" onclick="switchDocTab(3)">🧠 电控与智能化<span class="doc-count">(12)</span></button>
+    <button class="doc-tab" onclick="switchDocTab(4)">✈️ 总体设计<span class="doc-count">(1)</span></button>
+  </div>
+
+  <!-- Panel 0: 业务相关经历 -->
+  <div class="doc-panel active">
+    <p class="category-desc">业务方案编写、产品蓝图规划、数据链技术调研与系统级技术文档</p>
+    <div class="doc-grid">
+      <a class="doc-card animate" href="工作文件/业务相关经历/基于无人机技术应用于国省道公路养护巡检业务建设方案v3.docx" target="_blank">
+        <div class="doc-icon">🛣️</div>
+        <div class="doc-info">
+          <h4>基于无人机技术应用于国省道公路养护巡检业务建设方案 v3</h4>
+          <p>无人机在国省道公路养护巡检场景下的整体业务建设方案，覆盖工作流程、设备选型与系统集成</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/业务相关经历/小型系留照明无人机基础技术知识.docx" target="_blank">
+        <div class="doc-icon">💡</div>
+        <div class="doc-info">
+          <h4>小型系留照明无人机基础技术知识</h4>
+          <p>系留式照明无人机的技术原理、供电方案与典型应用场景梳理</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/业务相关经历/无人机蓝图.docx" target="_blank">
+        <div class="doc-icon">🗺️</div>
+        <div class="doc-info">
+          <h4>无人机蓝图</h4>
+          <p>无人机产品线整体技术蓝图与架构规划文档</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/业务相关经历/无人机远程指挥控制系统技术.docx" target="_blank">
+        <div class="doc-icon">📡</div>
+        <div class="doc-info">
+          <h4>无人机远程指挥控制系统技术</h4>
+          <p>无人机远程 C2 指挥控制系统的链路设计、地面操控台与指令通路技术方案</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/业务相关经历/无线数传电台工作技术原理和开发实现步骤详解.docx" target="_blank">
+        <div class="doc-icon">📻</div>
+        <div class="doc-info">
+          <h4>无线数传电台工作技术原理和开发实现步骤详解</h4>
+          <p>无线数传电台的工作原理解析与完整开发实现流程指导</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/业务相关经历/智能⽆⼈系统研发与检验检测平台.xlsx" target="_blank">
+        <div class="doc-icon">📊</div>
+        <div class="doc-info">
+          <h4>智能无人系统研发与检验检测平台</h4>
+          <p>智能无人系统的研发体系与检验检测平台规划方案</p>
+          <span class="doc-type xlsx">XLSX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/业务相关经历/系留无人机有线控制数据链技术.docx" target="_blank">
+        <div class="doc-icon">🔌</div>
+        <div class="doc-info">
+          <h4>系留无人机有线控制数据链技术</h4>
+          <p>系留无人机有线控制数据链的信号传输、接口协议与可靠性设计</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Panel 1: 可靠性与质量管理体系建设实践 -->
+  <div class="doc-panel">
+    <p class="category-desc">质量管理体系搭建、GA 认证、整机生产规范与可靠性测试评价</p>
+    <div class="doc-grid">
+      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/2、整机生产指导文档.docx" target="_blank">
+        <div class="doc-icon">🏭</div>
+        <div class="doc-info">
+          <h4>整机生产指导文档</h4>
+          <p>无人机整机生产的装配规范、工序检验与质量管控指导</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/QY行业无人机方案(1).pptx" target="_blank">
+        <div class="doc-icon">🛩️</div>
+        <div class="doc-info">
+          <h4>QY 行业无人机方案</h4>
+          <p>面向行业客户的 QY 系列无人机整体解决方案演示</p>
+          <span class="doc-type pptx">PPTX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/氢源无人机QC15整机结构设计.pptx" target="_blank">
+        <div class="doc-icon">🔩</div>
+        <div class="doc-info">
+          <h4>氢源无人机 QC15 整机结构设计</h4>
+          <p>QC15 型号无人机的整机结构设计方案与关键部件详细说明</p>
+          <span class="doc-type pptx">PPTX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/氢源智能--无人机GA认证项目-25.3.20.docx" target="_blank">
+        <div class="doc-icon">📋</div>
+        <div class="doc-info">
+          <h4>氢源智能——无人机 GA 认证项目</h4>
+          <p>无人机通用航空适航认证项目推进文档，覆盖 GA 认证流程与里程碑节点</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/（中国赛宝）民用轻小微无人机可靠性与安全性测试评价方法.pptx" target="_blank">
+        <div class="doc-icon">🔬</div>
+        <div class="doc-info">
+          <h4>民用轻小微无人机可靠性与安全性测试评价方法</h4>
+          <p>中国赛宝出品，轻小微型民用无人机的可靠性与安全性测试评价方法论</p>
+          <span class="doc-type pptx">PPTX</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Panel 2: 无人机整机产品动力部分工作实例 -->
+  <div class="doc-panel">
+    <p class="category-desc">电机选型、BMS 开发、航时分析与动力系统技术储备</p>
+    <div class="doc-grid">
+      <a class="doc-card animate" href="工作文件/无人机整机产品动力部分工作实例/1_电机参数要求表V6.2.xlsx" target="_blank">
+        <div class="doc-icon">⚙️</div>
+        <div class="doc-info">
+          <h4>电机参数要求表 V6.2</h4>
+          <p>无人机电机选型的核心参数指标要求与对比评估表</p>
+          <span class="doc-type xlsx">XLSX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品动力部分工作实例/BMS开发设计需求说明书 V1.1  2025-10(1).xlsx" target="_blank">
+        <div class="doc-icon">🔋</div>
+        <div class="doc-info">
+          <h4>BMS 开发设计需求说明书 V1.1</h4>
+          <p>电池管理系统（BMS）的功能需求、接口定义与设计规范</p>
+          <span class="doc-type xlsx">XLSX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品动力部分工作实例/FPV穿越机基础知识.docx" target="_blank">
+        <div class="doc-icon">🏎️</div>
+        <div class="doc-info">
+          <h4>FPV 穿越机基础知识</h4>
+          <p>FPV 穿越机的电机、电调、螺旋桨与机架的基础选型与调参知识</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品动力部分工作实例/负载15KG航时分析.docx" target="_blank">
+        <div class="doc-icon">⏱️</div>
+        <div class="doc-info">
+          <h4>负载 15KG 航时分析</h4>
+          <p>15kg 载荷条件下的无人机续航时间分析，包含能量消耗模型与飞行工况假设</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Panel 3: 无人机整机产品电控和智能化部分工作实例 -->
+  <div class="doc-panel">
+    <p class="category-desc">SLAM 导航方案、飞控协议、避障算法、ROS 系统集成与目标跟踪技术</p>
+    <div class="doc-grid">
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/2855836075GCU私有通信协议V2.0.6.pdf" target="_blank">
+        <div class="doc-icon">📡</div>
+        <div class="doc-info">
+          <h4>GCU 私有通信协议 V2.0.6</h4>
+          <p>GCU 地面控制单元的私有通信协议规范，涵盖帧格式、指令集与校验机制</p>
+          <span class="doc-type pdf">PDF</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/296地面站协议20240614.md" target="_blank">
+        <div class="doc-icon">🖥️</div>
+        <div class="doc-info">
+          <h4>296 地面站协议</h4>
+          <p>296 地面站与飞控通信协议，包含心跳、遥测、航点上传/下载及 CRC16 校验</p>
+          <span class="doc-type md">MD</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/50091119211：基于光流和Tof传感器的微型无人机避障算法_5.pdf" target="_blank">
+        <div class="doc-icon">👁️</div>
+        <div class="doc-info">
+          <h4>基于光流和 ToF 传感器的微型无人机避障算法</h4>
+          <p>光流与 ToF 传感器融合的微型无人机避障算法研究与实现方案</p>
+          <span class="doc-type pdf">PDF</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/egoplanner运行，代码功能，硬件，注意事项等.pdf" target="_blank">
+        <div class="doc-icon">🗺️</div>
+        <div class="doc-info">
+          <h4>EGO-Planner 运行、代码功能与硬件注意事项</h4>
+          <p>EGO-Planner 路径规划框架的运行指南、代码功能解析与硬件部署注意事项</p>
+          <span class="doc-type pdf">PDF</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/QLS200自测用例.docx" target="_blank">
+        <div class="doc-icon">✅</div>
+        <div class="doc-info">
+          <h4>QLS200 自测用例</h4>
+          <p>QLS200 导航模组的自测用例集，覆盖功能验证与边界条件测试</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/ROS topic汇总（讨论）.docx" target="_blank">
+        <div class="doc-icon">🤖</div>
+        <div class="doc-info">
+          <h4>ROS Topic 汇总（讨论）</h4>
+          <p>机载 ROS 系统 Topic 定义汇总，包含话题名称、频率与数据归属讨论</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/【QVS110】高空定位模组定位信号决策图.pptx" target="_blank">
+        <div class="doc-icon">📍</div>
+        <div class="doc-info">
+          <h4>【QVS110】高空定位模组定位信号决策图</h4>
+          <p>QVS110 高空定位模组的多源信号决策逻辑与信号融合策略</p>
+          <span class="doc-type pptx">PPTX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/无人机导航技术.docx" target="_blank">
+        <div class="doc-icon">🧭</div>
+        <div class="doc-info">
+          <h4>无人机导航技术</h4>
+          <p>无人机导航技术综述，涵盖传感器融合、GNSS/INS 组合导航与多模式切换</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/无人机融合视觉+激光雷达避障功能需求说明书.docx" target="_blank">
+        <div class="doc-icon">🚧</div>
+        <div class="doc-info">
+          <h4>无人机融合视觉+激光雷达避障功能需求说明书</h4>
+          <p>视觉与激光雷达融合避障的功能需求规格，包含场景定义与性能指标</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/无人机被动目标定位与跟踪控制技术探索.docx" target="_blank">
+        <div class="doc-icon">🎯</div>
+        <div class="doc-info">
+          <h4>无人机被动目标定位与跟踪控制技术探索</h4>
+          <p>非合作目标条件下的被动定位与跟踪控制技术研究，探索纯光电方案可行性</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/视觉SLAM辅助定位与避障系统技术方案_1024.docx" target="_blank">
+        <div class="doc-icon">🗺️</div>
+        <div class="doc-info">
+          <h4>视觉 SLAM 辅助定位与避障系统技术方案</h4>
+          <p>视觉 SLAM 辅助的定位与避障一体化系统技术方案，支持 GNSS 拒止环境应用</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/飞控协议.docx" target="_blank">
+        <div class="doc-icon">🎮</div>
+        <div class="doc-info">
+          <h4>飞控协议</h4>
+          <p>飞控系统通信协议文档，定义数据链路、指令格式与状态反馈机制</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Panel 4: 无人机整机方案总体设计类工作实例 -->
+  <div class="doc-panel">
+    <p class="category-desc">无人机与配套设施的系统级总体设计方案</p>
+    <div class="doc-grid">
+      <a class="doc-card animate" href="工作文件/无人机整机方案总体设计类工作实例/无人机与机巢解决方案.docx" target="_blank">
+        <div class="doc-icon">🏗️</div>
+        <div class="doc-info">
+          <h4>无人机与机巢解决方案</h4>
+          <p>无人机与自动机巢配套的系统级解决方案，覆盖起降回收、自动充电、联网监控与运维概念</p>
+          <span class="doc-type docx">DOCX</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- ═══════ Supply Chain ═══════ -->
 <section class="section" id="supply">
@@ -1095,6 +1481,23 @@ body::after{
       <span>北京航空航天大学</span>
     </div>
   </div>
+
+  <div class="salary-banner animate">
+    <div class="salary-item">
+      <div class="salary-value">44.8w+</div>
+      <div class="salary-label">当前年包薪资</div>
+    </div>
+    <div class="salary-divider"></div>
+    <div class="salary-item">
+      <div class="salary-value">奖金 + 期权</div>
+      <div class="salary-label">额外激励</div>
+    </div>
+    <div class="salary-divider"></div>
+    <div class="salary-item">
+      <div class="salary-value">占股 10%</div>
+      <div class="salary-label">孵化子公司股份</div>
+    </div>
+  </div>
 </section>
 
 <footer class="footer">
@@ -1192,6 +1595,21 @@ function closeLightbox(e){
     document.body.style.overflow = '';
   }
 }
+// ── Document tabs ──
+function switchDocTab(idx){
+  document.querySelectorAll('.doc-tab').forEach((t,i)=>{
+    t.classList.toggle('active', i===idx);
+  });
+  document.querySelectorAll('.doc-panel').forEach((p,i)=>{
+    p.classList.toggle('active', i===idx);
+    if(i===idx){
+      p.querySelectorAll('.animate').forEach(el=>{
+        observer.observe(el);
+      });
+    }
+  });
+}
+
 document.addEventListener('keydown', e=>{
   if(e.key === 'Escape') {
     const lb = document.getElementById('lightbox');
