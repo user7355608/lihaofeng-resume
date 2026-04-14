@@ -12,6 +12,8 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="李昊峰个人简历">
 <meta name="twitter:description" content="无人机系统 · SLAM算法 · 研发团队管理 | 北航本科 · 3年行业经验 · 算法部门负责人">
+<link rel="preconnect" href="https://view.officeapps.live.com">
+<link rel="dns-prefetch" href="https://view.officeapps.live.com">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -405,6 +407,28 @@ body::after{
   transition:background .2s;border:none;
 }
 .lightbox .lb-close:hover{background:rgba(255,255,255,.2)}
+
+/* ── image loading optimization ── */
+.showcase-card .card-media{
+  background:linear-gradient(110deg,#0a1a20 30%,#122a32 50%,#0a1a20 70%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s ease-in-out infinite;
+}
+.showcase-card .card-media img,
+.showcase-card .card-media video{
+  opacity:0;transition:opacity .4s ease,transform .5s;
+}
+.showcase-card .card-media img.loaded,
+.showcase-card .card-media video.loaded{opacity:1}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── doc open indicator ── */
+.doc-card .doc-open-hint{
+  position:absolute;top:50%;right:1.2rem;transform:translateY(-50%);
+  font-size:.85rem;color:var(--text-dim);opacity:0;transition:opacity .3s;
+  display:flex;align-items:center;gap:.3rem;
+}
+.doc-card:hover .doc-open-hint{opacity:1}
 
 /* ── document showcase ── */
 .doc-tabs{
@@ -1595,6 +1619,42 @@ function closeLightbox(e){
     document.body.style.overflow = '';
   }
 }
+// ── Image & video load optimization ──
+document.querySelectorAll('.card-media img, .card-media video').forEach(el=>{
+  if(el.tagName==='IMG'){
+    if(el.complete) el.classList.add('loaded');
+    else el.addEventListener('load',()=>el.classList.add('loaded'));
+    el.addEventListener('error',()=>el.classList.add('loaded'));
+  } else {
+    el.addEventListener('loadeddata',()=>el.classList.add('loaded'));
+    el.addEventListener('loadedmetadata',()=>el.classList.add('loaded'));
+    if(el.readyState>=1) el.classList.add('loaded');
+  }
+});
+
+// ── Document open with Office Online viewer ──
+const SITE_BASE = 'https://user7355608.github.io/lihaofeng-resume/';
+const OFFICE_EXTS = ['docx','xlsx','pptx'];
+
+document.querySelectorAll('a.doc-card').forEach(card=>{
+  const hint = document.createElement('div');
+  hint.className = 'doc-open-hint';
+  hint.innerHTML = '在线预览 ↗';
+  card.appendChild(hint);
+  card.addEventListener('click', function(e){
+    e.preventDefault();
+    const href = this.getAttribute('href');
+    const ext = href.split('.').pop().toLowerCase();
+    if(OFFICE_EXTS.includes(ext)){
+      const fullUrl = SITE_BASE + encodeURI(href).replace(/\(/g,'%28').replace(/\)/g,'%29');
+      const viewerUrl = 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(fullUrl);
+      window.open(viewerUrl, '_blank');
+    } else {
+      window.open(href, '_blank');
+    }
+  });
+});
+
 // ── Document tabs ──
 function switchDocTab(idx){
   document.querySelectorAll('.doc-tab').forEach((t,i)=>{
