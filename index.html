@@ -414,12 +414,13 @@ body::after{
   background-size:200% 100%;
   animation:shimmer 1.5s ease-in-out infinite;
 }
-.showcase-card .card-media img,
-.showcase-card .card-media video{
+.showcase-card .card-media.settled{animation:none;background:#0a1a20}
+.showcase-card .card-media img{
   opacity:0;transition:opacity .4s ease,transform .5s;
 }
-.showcase-card .card-media img.loaded,
-.showcase-card .card-media video.loaded{opacity:1}
+.showcase-card .card-media img.loaded{opacity:1}
+/* videos rely on their poster attribute, so they stay visible */
+.showcase-card .card-media video{opacity:1}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 /* ── doc open indicator ── */
@@ -926,7 +927,7 @@ body::after{
     <div class="showcase-card animate" onclick="openLightbox(this)">
       <div class="card-media">
         <span class="media-tag product">导航模块</span>
-        <img src="成果图片/前下视觉导航避障模块.jpg" alt="前下视觉导航避障模块" loading="lazy">
+        <img src="成果图片/前下视觉导航避障模块.webp" alt="前下视觉导航避障模块" loading="lazy" decoding="async" width="1228" height="1024">
       </div>
       <div class="card-body">
         <h4>前下视觉导航避障模块</h4>
@@ -937,7 +938,7 @@ body::after{
     <div class="showcase-card animate" onclick="openLightbox(this)">
       <div class="card-media">
         <span class="media-tag product">导航模块</span>
-        <img src="成果图片/双目惯性组合导航模块.jpg" alt="双目惯性组合导航模块" loading="lazy">
+        <img src="成果图片/双目惯性组合导航模块.webp" alt="双目惯性组合导航模块" loading="lazy" decoding="async" width="1100" height="1467">
       </div>
       <div class="card-body">
         <h4>双目惯性组合导航模块</h4>
@@ -948,7 +949,7 @@ body::after{
     <div class="showcase-card animate" onclick="openLightbox(this)">
       <div class="card-media">
         <span class="media-tag product">导航模块</span>
-        <img src="成果图片/红外可见光景象匹配导航模组.jpg" alt="红外可见光景象匹配导航模组" loading="lazy">
+        <img src="成果图片/红外可见光景象匹配导航模组.webp" alt="红外可见光景象匹配导航模组" loading="lazy" decoding="async" width="769" height="691">
       </div>
       <div class="card-body">
         <h4>红外可见光景象匹配导航模组</h4>
@@ -959,7 +960,7 @@ body::after{
     <div class="showcase-card animate" onclick="openLightbox(this)">
       <div class="card-media">
         <span class="media-tag product">导航模块</span>
-        <img src="成果图片/激光视觉组合扫描仪.jpg" alt="激光视觉组合扫描仪" loading="lazy">
+        <img src="成果图片/激光视觉组合扫描仪.webp" alt="激光视觉组合扫描仪" loading="lazy" decoding="async" width="771" height="647">
       </div>
       <div class="card-body">
         <h4>激光视觉组合扫描仪</h4>
@@ -970,7 +971,7 @@ body::after{
     <div class="showcase-card animate" onclick="openLightbox(this)">
       <div class="card-media">
         <span class="media-tag product">核心器件</span>
-        <img src="成果图片/高精度IMU模块.jpg" alt="高精度IMU模块" loading="lazy">
+        <img src="成果图片/高精度IMU模块.webp" alt="高精度IMU模块" loading="lazy" decoding="async" width="910" height="674">
       </div>
       <div class="card-body">
         <h4>高精度 IMU 模块</h4>
@@ -981,7 +982,7 @@ body::after{
     <div class="showcase-card animate" onclick="openLightbox(this)">
       <div class="card-media">
         <span class="media-tag system">总体设计</span>
-        <img src="成果图片/激光导航飞机总体设计管理.png" alt="激光导航飞机总体设计管理" loading="lazy">
+        <img src="成果图片/激光导航飞机总体设计管理.webp" alt="激光导航飞机总体设计管理" loading="lazy" decoding="async" width="336" height="562">
       </div>
       <div class="card-body">
         <h4>激光导航飞机总体设计管理</h4>
@@ -992,7 +993,7 @@ body::after{
     <div class="showcase-card animate" onclick="openLightbox(this)">
       <div class="card-media">
         <span class="media-tag algo">算法成果</span>
-        <img src="成果图片/算法.jpg" alt="SLAM算法轨迹" loading="lazy">
+        <img src="成果图片/算法.webp" alt="SLAM算法轨迹" loading="lazy" decoding="async" width="1100" height="619">
       </div>
       <div class="card-body">
         <h4>多传感器融合 SLAM 轨迹</h4>
@@ -1003,7 +1004,7 @@ body::after{
     <div class="showcase-card animate" onclick="openLightbox(this)">
       <div class="card-media">
         <span class="media-tag system">系统集成</span>
-        <img src="成果图片/地面站实物.jpg" alt="地面站实物" loading="lazy">
+        <img src="成果图片/地面站实物.webp" alt="地面站实物" loading="lazy" decoding="async" width="960" height="1282">
       </div>
       <div class="card-body">
         <h4>SLAM 地面站实物</h4>
@@ -1014,7 +1015,7 @@ body::after{
     <div class="showcase-card animate" onclick="openLightbox(this)">
       <div class="card-media">
         <span class="media-tag supply">供应链</span>
-        <img src="成果图片/高能量半固态电芯.jpg" alt="高能量半固态电芯" loading="lazy">
+        <img src="成果图片/高能量半固态电芯.webp" alt="高能量半固态电芯" loading="lazy" decoding="async" width="1080" height="1920">
       </div>
       <div class="card-body">
         <h4>高能量半固态电芯</h4>
@@ -1026,7 +1027,7 @@ body::after{
       <div class="card-media">
         <span class="media-tag video-tag">视频</span>
         <div class="play-overlay"><span>▶</span></div>
-        <video src="成果图片/激光SLAM室内无人机.mp4" muted preload="metadata"></video>
+        <video src="成果图片/激光SLAM室内无人机.mp4" muted preload="none" playsinline poster="成果图片/激光SLAM室内无人机_poster.jpg"></video>
       </div>
       <div class="card-body">
         <h4>激光 SLAM 室内无人机</h4>
@@ -1038,7 +1039,7 @@ body::after{
       <div class="card-media">
         <span class="media-tag video-tag">视频</span>
         <div class="play-overlay"><span>▶</span></div>
-        <video src="成果图片/激光SLAM无人机地面站.mp4" muted preload="metadata"></video>
+        <video src="成果图片/激光SLAM无人机地面站.mp4" muted preload="none" playsinline poster="成果图片/激光SLAM无人机地面站_poster.jpg"></video>
       </div>
       <div class="card-body">
         <h4>激光 SLAM 无人机地面站</h4>
@@ -1050,7 +1051,7 @@ body::after{
       <div class="card-media">
         <span class="media-tag video-tag">视频</span>
         <div class="play-overlay"><span>▶</span></div>
-        <video src="成果图片/抗干扰组合导航整机.mp4" muted preload="metadata"></video>
+        <video src="成果图片/抗干扰组合导航整机.mp4" muted preload="none" playsinline poster="成果图片/抗干扰组合导航整机_poster.jpg"></video>
       </div>
       <div class="card-body">
         <h4>抗干扰组合导航整机</h4>
@@ -1159,20 +1160,20 @@ body::after{
           <span class="doc-type docx">DOCX</span>
         </div>
       </a>
-      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/QY行业无人机方案(1).pptx" target="_blank">
+      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/QY行业无人机方案(1).pdf" target="_blank">
         <div class="doc-icon">🛩️</div>
         <div class="doc-info">
           <h4>QY 行业无人机方案</h4>
           <p>面向行业客户的 QY 系列无人机整体解决方案演示</p>
-          <span class="doc-type pptx">PPTX</span>
+          <span class="doc-type pdf">PDF</span>
         </div>
       </a>
-      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/氢源无人机QC15整机结构设计.pptx" target="_blank">
+      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/氢源无人机QC15整机结构设计.pdf" target="_blank">
         <div class="doc-icon">🔩</div>
         <div class="doc-info">
           <h4>氢源无人机 QC15 整机结构设计</h4>
           <p>QC15 型号无人机的整机结构设计方案与关键部件详细说明</p>
-          <span class="doc-type pptx">PPTX</span>
+          <span class="doc-type pdf">PDF</span>
         </div>
       </a>
       <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/氢源智能--无人机GA认证项目-25.3.20.docx" target="_blank">
@@ -1183,12 +1184,12 @@ body::after{
           <span class="doc-type docx">DOCX</span>
         </div>
       </a>
-      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/（中国赛宝）民用轻小微无人机可靠性与安全性测试评价方法.pptx" target="_blank">
+      <a class="doc-card animate" href="工作文件/可靠性与质量管理体系建设实践/（中国赛宝）民用轻小微无人机可靠性与安全性测试评价方法.pdf" target="_blank">
         <div class="doc-icon">🔬</div>
         <div class="doc-info">
           <h4>民用轻小微无人机可靠性与安全性测试评价方法</h4>
           <p>中国赛宝出品，轻小微型民用无人机的可靠性与安全性测试评价方法论</p>
-          <span class="doc-type pptx">PPTX</span>
+          <span class="doc-type pdf">PDF</span>
         </div>
       </a>
     </div>
@@ -1285,12 +1286,12 @@ body::after{
           <span class="doc-type docx">DOCX</span>
         </div>
       </a>
-      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/【QVS110】高空定位模组定位信号决策图.pptx" target="_blank">
+      <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/【QVS110】高空定位模组定位信号决策图.pdf" target="_blank">
         <div class="doc-icon">📍</div>
         <div class="doc-info">
           <h4>【QVS110】高空定位模组定位信号决策图</h4>
           <p>QVS110 高空定位模组的多源信号决策逻辑与信号融合策略</p>
-          <span class="doc-type pptx">PPTX</span>
+          <span class="doc-type pdf">PDF</span>
         </div>
       </a>
       <a class="doc-card animate" href="工作文件/无人机整机产品电控和智能化部分工作实例/无人机导航技术.docx" target="_blank">
@@ -1619,17 +1620,21 @@ function closeLightbox(e){
     document.body.style.overflow = '';
   }
 }
-// ── Image & video load optimization ──
-document.querySelectorAll('.card-media img, .card-media video').forEach(el=>{
-  if(el.tagName==='IMG'){
-    if(el.complete) el.classList.add('loaded');
-    else el.addEventListener('load',()=>el.classList.add('loaded'));
-    el.addEventListener('error',()=>el.classList.add('loaded'));
-  } else {
-    el.addEventListener('loadeddata',()=>el.classList.add('loaded'));
-    el.addEventListener('loadedmetadata',()=>el.classList.add('loaded'));
-    if(el.readyState>=1) el.classList.add('loaded');
+// ── Image fade-in once decoded, then stop the skeleton shimmer ──
+document.querySelectorAll('.card-media img').forEach(img=>{
+  const settle = ()=>{
+    img.classList.add('loaded');
+    img.closest('.card-media').classList.add('settled');
+  };
+  if(img.complete) settle();
+  else{
+    img.addEventListener('load', settle);
+    img.addEventListener('error', settle);
   }
+});
+// videos show their poster immediately, so no shimmer needed
+document.querySelectorAll('.card-media video').forEach(v=>{
+  v.closest('.card-media').classList.add('settled');
 });
 
 // ── Document open with Office Online viewer ──
